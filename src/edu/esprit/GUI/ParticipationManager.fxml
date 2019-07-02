@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="469.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.esprit.GUI.ParticipationManagerController">
+    <children>
+        <TableView fx:id="participationTable" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="327.0">
+            <columns>
+                <TableColumn prefWidth="75.0" text="Participant" fx:id="UserColumn" />
+                <TableColumn prefWidth="75.0" text="Role" fx:id="RoleColumn" />
+            </columns>
+        </TableView>
+        <Button layoutX="375.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#OnAdd" prefWidth="76.0" text="Ajouter" />
+        <Button layoutX="375.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#OnModify" prefWidth="76.0" text="Modifier" />
+        <Button layoutX="375.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#OnDelete" text="Supprimer" />
+        <Button layoutX="375.0" layoutY="140.0" mnemonicParsing="false" onMouseClicked="#OnValidate" prefWidth="76.0" text="Valider" />
+        <ComboBox fx:id="userCombo" layoutX="22.0" layoutY="237.0" prefHeight="21.0" prefWidth="160.0" promptText="Participant">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Item 1" />
+                    <String fx:value="Item 2" />
+                    <String fx:value="Item 3" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <ComboBox fx:id="roleCombo" layoutX="186.0" layoutY="237.0" prefHeight="21.0" prefWidth="160.0" promptText="Role">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Item 1" />
+                    <String fx:value="Item 2" />
+                    <String fx:value="Item 3" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+    </children>
+    <stylesheets>
+        <URL value="@participationmanager.css" />
+    </stylesheets>
+</AnchorPane>

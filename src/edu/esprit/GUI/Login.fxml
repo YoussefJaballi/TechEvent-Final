@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="194.94140625" prefWidth="362.5078125" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.esprit.GUI.LoginController">
+  <children>
+    <Button fx:id="button" layoutX="220.0" layoutY="109.0" onAction="#handleButtonAction" text="Connexion" />
+    <TextField fx:id="Login" layoutX="125.0" layoutY="28.0" />
+    <PasswordField id="Password" fx:id="Pasword" layoutX="125.0" layoutY="65.0" prefWidth="189.0" />
+    <!--    <TextField id="Password" fx:id="Pasword" layoutX="106.0" layoutY="65.0" />-->
+    <Label layoutX="25.0" layoutY="32.0" text="Login" />
+    <Label layoutX="25.0" layoutY="69.0" text="Mot de passe" />
+    <Hyperlink layoutX="14.0" layoutY="166.0" onMouseClicked="#onForgotPassword" prefWidth="145.0" text="Mot de passe oublié">
+      <font>
+        <Font size="12.0" />
+      </font>
+    </Hyperlink>
+    <Button layoutX="125.0" layoutY="109.0" mnemonicParsing="false" onMouseClicked="#onSignup" prefWidth="90.0" text="S'inscrire" />
+  </children>
+</AnchorPane>

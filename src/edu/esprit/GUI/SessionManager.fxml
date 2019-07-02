@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="469.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.GUI.SessionManagerController">
+    <children>
+        <TableView fx:id="sessionTable" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="327.0">
+            <columns>
+                <TableColumn fx:id="sessionNameColumn" prefWidth="75.0" text="Nom" />
+                <TableColumn fx:id="beginColumn" prefWidth="75.0" text="Date début" />
+                <TableColumn fx:id="endColumn" prefWidth="76.0" text="Date fin" />
+            </columns>
+        </TableView>
+        <Button layoutX="375.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#OnAdd" prefWidth="76.0" text="Ajouter" />
+        <Button layoutX="375.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#OnModify" prefWidth="76.0" text="Modifier" />
+        <Button layoutX="375.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#OnDelete" text="Supprimer" />
+        <Button layoutX="375.0" layoutY="140.0" mnemonicParsing="false" onMouseClicked="#OnValidate" prefWidth="76.0" text="Valider" />
+        <AnchorPane fx:id="beginCont" layoutX="14.0" layoutY="280.0" prefHeight="101.0" prefWidth="179.0" />
+        <Label layoutX="29.0" layoutY="263.0" text="Date debut" />
+        <Label layoutX="289.0" layoutY="263.0" text="Date fin" />
+        <AnchorPane fx:id="endCont" layoutX="276.0" layoutY="280.0" prefHeight="101.0" prefWidth="179.0" />
+        <Label layoutX="29.0" layoutY="227.0" text="Nom" />
+        <TextField fx:id="nameInput" layoutX="86.0" layoutY="223.0" />
+    </children>
+   
+    <stylesheets>
+        <URL value="@sessionmanager.css" />
+    </stylesheets>
+</AnchorPane>

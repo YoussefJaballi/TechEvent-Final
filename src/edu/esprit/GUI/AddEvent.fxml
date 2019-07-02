@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.esprit.GUI.AddEventController">
+  <children>
+    <AnchorPane fx:id="mapCont" layoutX="386.0" layoutY="35.0" prefHeight="200.0" prefWidth="200.0" />
+    <VBox layoutX="109.0" layoutY="14.0" prefHeight="-1.0" prefWidth="277.0">
+      <children>
+        <HBox id="HBox" alignment="CENTER" spacing="5.0">
+          <children>
+            <TextField fx:id="TitleInput" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" prefWidth="286.0" spacing="5.0">
+          <children>
+            <TextArea fx:id="DescInput" prefWidth="-1.0" wrapText="true" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" prefWidth="286.0" spacing="5.0">
+          <children>
+            <ComboBox fx:id="CategoryCmbo" prefHeight="21.0" prefWidth="296.0" HBox.hgrow="ALWAYS">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+              <HBox.margin>
+                <Insets top="5.0" />
+              </HBox.margin>
+            </ComboBox>
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" prefWidth="286.0" spacing="5.0">
+          <children>
+            <Label fx:id="photoPathLabel" prefWidth="200.0" text="" />
+            <Button mnemonicParsing="false" onMouseClicked="#OnBrowseClick" text="Parcourir" />
+          </children>
+        </HBox>
+        <HBox id="HBox" fx:id="PriceContainer" alignment="CENTER" disable="false" prefWidth="277.0" spacing="5.0" visible="false">
+          <children>
+            <Label text="Prix" />
+            <TextField fx:id="priceInput" prefWidth="88.0" />
+          </children>
+        </HBox>
+      </children>
+      <padding>
+        <Insets />
+      </padding>
+    </VBox>
+    <VBox layoutX="21.0" layoutY="14.0" prefHeight="236.0" prefWidth="88.0">
+      <children>
+        <Label text="Titre">
+          <tooltip>
+            <Tooltip text="Titre obligatoire" />
+          </tooltip>
+        </Label>
+        <Label text="Description">
+          <VBox.margin>
+            <Insets bottom="95.0" top="75.0" />
+          </VBox.margin>
+        </Label>
+        <Label text="Categorie" />
+        <Label text="Photo" />
+      </children>
+    </VBox>
+    <Label layoutX="386.0" layoutY="17.0" text="Adresse" />
+    <Button layoutX="300.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#OnClickPartisipation" text="Gerer participants" />
+    <Button fx:id="session" layoutX="428.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#OnClickSession" text="Gerer Sessions" />
+    <Button fx:id="submitButton" layoutX="537.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#OnCreateEvent" text="Creer" />
+    <CheckBox fx:id="freeCheck" layoutX="21.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#OnFreeChecked" prefHeight="26.0" prefWidth="88.0" text="Payant" />
+  </children>
+  <stylesheets>
+    <URL value="@addevent.css" />
+  </stylesheets>
+</AnchorPane>

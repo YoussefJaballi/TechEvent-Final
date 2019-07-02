@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="reportsAnchorpane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.GUI.ReportsController">
+  <stylesheets>
+    <URL value="@reports.css" />
+  </stylesheets>
+   <children>
+      <Label text="Les Différents reclamations" />
+      <TableView fx:id="reportsTable" layoutX="10.0" layoutY="27.0" prefHeight="254.0" prefWidth="407.0">
+        <columns>
+          <TableColumn fx:id="reporter_id" prefWidth="138.0" text="Nom_Reporteur" />
+          <TableColumn fx:id="target" prefWidth="160.0" text="Cible" />
+            <TableColumn fx:id="target_id" prefWidth="116.0" text="Cible_ID" />
+        </columns>
+      </TableView>
+      <AnchorPane fx:id="rating" layoutX="167.0" layoutY="307.0" prefHeight="46.0" prefWidth="143.0" />
+   </children>
+</AnchorPane>

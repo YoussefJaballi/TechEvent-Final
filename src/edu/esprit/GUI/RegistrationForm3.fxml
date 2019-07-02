@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="RegistrationForm3AnchorPane" id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.GUI.RegistrationForm3Controller">
+    <stylesheets>
+        <URL value="@registrationform3.css"/>
+    </stylesheets>
+    <Button fx:id="button" layoutX="106.0" layoutY="428.0" onAction="#handleNextButtonAction" text="Suivant" />
+    <TextField fx:id="AdresseTxt" layoutX="106.0" layoutY="28.0" />
+    <Label fx:id="AdresseLabel" layoutX="26.0" layoutY="32.0" text="Adresse" />
+    <TextField fx:id="EmailTxt" layoutX="106.0" layoutY="128.0" />
+    <Label fx:id="EmailLabel" layoutX="26.0" layoutY="132.0" text="Email" />
+    <TextField fx:id="TelephoneTxt" layoutX="100.0" layoutY="228.0" />
+    <Label fx:id="TelephoneLabel" layoutX="26.0" layoutY="232.0" text="Telephone" />
+    <ComboBox fx:id="EnterpriseComboBox" layoutX="106.0" layoutY="328.0" />
+    <Label fx:id="EnterpriseLabel" layoutX="26.0" layoutY="332.0" text="Enterprise" />
+</AnchorPane>

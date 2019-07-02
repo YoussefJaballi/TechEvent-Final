@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="RegistrationAnchropane" id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.GUI.RegistrationForm1Controller">
+    <stylesheets>
+        <URL value="@registrationform1.css"/>
+    </stylesheets>
+    <Button fx:id="button" layoutX="106.0" layoutY="125.0" onAction="#handleNextButtonAction" text="Suivant" />
+    <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
+    <ComboBox fx:id="RoleComboBox" layoutX="106.0" layoutY="28.0" />
+    <Label fx:id="RoleLabel" layoutX="26.0" layoutY="32.0" text="Role" />
+</AnchorPane>
