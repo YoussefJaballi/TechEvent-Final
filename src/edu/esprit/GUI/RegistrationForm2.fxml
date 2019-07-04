@@ -7,19 +7,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="RegistrationForm2AnchorPane" id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.GUI.RegistrationForm2Controller">
-    <stylesheets>
-        <URL value="@registrationform2.css"/>
-    </stylesheets>
-    
-    <Button fx:id="button" layoutX="106.0" layoutY="432.0" onAction="#handleNextButtonAction" text="Suivant" />
-    <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
-    <TextField fx:id="NomTxt" layoutX="106.0" layoutY="28.0" />
-    <Label fx:id="NomLabel" layoutX="26.0" layoutY="32.0" text="Nom" />
-    <TextField fx:id="PrenomTxt" layoutX="106.0" layoutY="128.0" />
-    <Label fx:id="PrenomLabel" layoutX="26.0" layoutY="132.0" text="Prenom" />
-    <DatePicker fx:id="DateNaissanceDate" layoutX="106.0" layoutY="228.0" />
-    <Label fx:id="DateNaissanceLabel" layoutX="26.0" layoutY="232.0" text="Date Naissance" />
-     <Button fx:id="PhotoButton" layoutX="106.0" layoutY="328.0" text="Upload" onAction="#handlePhotoButtonAction"/>
-    <Label fx:id="PhotoLabel" layoutX="26.0" layoutY="332.0" text="Photo" />
+<AnchorPane id="AnchorPane" fx:id="RegistrationForm2AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.esprit.GUI.RegistrationForm2Controller">
+  <stylesheets>
+    <URL value="@registrationform2.css" />
+  </stylesheets>
+  <Button fx:id="button" layoutX="471.0" layoutY="393.0" onAction="#handleNextButtonAction" text="Suivant" />
+  <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
+  <TextField fx:id="NomTxt" layoutX="106.0" layoutY="28.0" />
+  <Label fx:id="NomLabel" layoutX="26.0" layoutY="32.0" text="Nom" />
+  <TextField fx:id="PrenomTxt" layoutX="106.0" layoutY="128.0" />
+  <Label fx:id="PrenomLabel" layoutX="26.0" layoutY="132.0" text="Prenom" />
+  <DatePicker fx:id="DateNaissanceDate" layoutX="106.0" layoutY="228.0" />
+  <Label fx:id="DateNaissanceLabel" layoutX="26.0" layoutY="232.0" text="Date Naissance" />
+  <Button fx:id="PhotoButton" layoutX="106.0" layoutY="328.0" onAction="#handlePhotoButtonAction" text="Upload" />
+  <Label fx:id="PhotoLabel" layoutX="26.0" layoutY="332.0" text="Photo" />
 </AnchorPane>

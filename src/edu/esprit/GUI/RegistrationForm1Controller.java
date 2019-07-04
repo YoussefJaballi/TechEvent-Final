@@ -61,7 +61,7 @@ public class RegistrationForm1Controller implements Initializable {
         if(RoleComboBox.getValue() != null)
         {
             User u = new User();
-            u.setRoleID(RoleComboBox.getValue());
+            u.setRole(RoleComboBox.getValue());
             UserManager.setRegisterUser(u);
             RegistrationAnchropane.getChildren().clear();
             AnchorPane content = null;
