@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class ServiceUtils {
 
-    Connection cnx;
+    protected Connection cnx;
 
     public ServiceUtils() {
         try {
