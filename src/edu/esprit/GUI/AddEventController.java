@@ -22,6 +22,7 @@ import edu.esprit.models.Event;
 import edu.esprit.models.Location;
 import edu.esprit.models.Rating;
 import edu.esprit.services.exeptions.ComposedIDExeption;
+import edu.esprit.utils.ServiceMail;
 import edu.esprit.utils.ServiceManager;
 import edu.esprit.utils.UserManager;
 import java.net.URL;
@@ -288,29 +289,24 @@ public class AddEventController implements Initializable, MapComponentInitialize
         alert.setTitle("Erreur");
         alert.setHeaderText(null);
         //  alert.setContentText("il faut remplir tous les champs ");
-           if (this.CategoryCmbo.getValue() == null ) {
+        if (this.CategoryCmbo.getValue() == null) {
             alert.setContentText("Categorie obligatoire  !");
             alert.showAndWait();
             this.CategoryCmbo.requestFocus();
-        }
-           else
-         if (this.location == null ) {
+        } else if (this.location == null) {
             alert.setContentText("adresse obligatoire ! ");
             alert.showAndWait();
-            
-        }else
-         if (this.TitleInput.getText().equals("")) {
-             alert.setContentText("Titre obligatoire ! ");
-             alert.showAndWait();
-             this.TitleInput.requestFocus();
-        }else
-        if (SessionManagerController.validatedSessions == null || SessionManagerController.validatedSessions.size()  ==0) {
-        alert.setContentText("session vide ! ");
-        alert.showAndWait();
-        this.session.requestFocus();
- 
+
+        } else if (this.TitleInput.getText().equals("")) {
+            alert.setContentText("Titre obligatoire ! ");
+            alert.showAndWait();
+            this.TitleInput.requestFocus();
+        } else if (SessionManagerController.validatedSessions == null || SessionManagerController.validatedSessions.size() == 0) {
+            alert.setContentText("session vide ! ");
+            alert.showAndWait();
+            this.session.requestFocus();
+
         }
-       
 
         Map uploadResult = null;
         Map<Object, Object> CONFIG = new HashMap<>();
@@ -339,6 +335,20 @@ public class AddEventController implements Initializable, MapComponentInitialize
                     SessionManagerController.validatedSessions,
                     new ArrayList<Comment>()
             );
+            String message = "Vous ette invité a l evennement " + e.getTitle() + "creer par l'entreprise " + e.getOrganisator().getEntreprise().getName();
+
+            
+            e.getParticipations().forEach(p -> {
+                try {
+                    ServiceMail.sendMail(
+                            ServiceManager.getInstance().getUserService().find(p.getUserId()).getEmail(),
+                            "Invitation a un evennement",
+                            message
+                    );
+                } catch (Exception ex) {
+                    Logger.getLogger(AddEventController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
             System.out.println(e);
             ServiceManager.getInstance().getEventService().create(e);
         } catch (IOException ex) {
