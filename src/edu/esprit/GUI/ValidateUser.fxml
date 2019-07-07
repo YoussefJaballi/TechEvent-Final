@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="218.0" prefWidth="451.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.esprit.GUI.ValidateUserController">
+  <children>
+    <TextField fx:id="confirmationTxt" layoutX="228.0" layoutY="66.0" prefWidth="200.0" />
+    <Label layoutX="12.0" layoutY="69.0" text="Entrer le code de confirmation :" />
+    <Button layoutX="271.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#onValidateCode" prefWidth="140.0" text="Valider" />
+  </children>
+  <stylesheets>
+    <URL value="@validateuser.css" />
+  </stylesheets>
+</AnchorPane>

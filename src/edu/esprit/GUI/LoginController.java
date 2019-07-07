@@ -6,6 +6,7 @@
  */
 package edu.esprit.GUI;
 
+import static edu.esprit.GUI.ValidateUserController.userToConfirm;
 import edu.esprit.models.User;
 import edu.esprit.services.implementation.UserService;
 import edu.esprit.utils.ServiceManager;
@@ -19,10 +20,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -48,6 +51,7 @@ public class LoginController implements Initializable {
             System.out.println(Pasword.getText());
             User u = ServiceManager.getInstance().getUserService().login(Login.getText(), Pasword.getText());
             if (u != null) {
+                System.out.println(u);
                 if (u.isIsActivated())
                 {
                     UserManager.setUser(u);
@@ -59,8 +63,21 @@ public class LoginController implements Initializable {
                     Stage x = (Stage) Login.getScene().getWindow();
                     x.close();
                     s.show();
+                }else{
+                   ValidateUserController.userToConfirm=u;
+                    Parent root = FXMLLoader.load(getClass().getResource("ValidateUser.fxml"));
+                    Stage s = new Stage();
+                    Scene se = new Scene(root);
+                    s.setScene(se);
+                    Stage x = (Stage) Login.getScene().getWindow();
+                    x.close();
+                    s.show();
                 }
             } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Login ou mot de passe incorect !");
+                alert.showAndWait();
+                Login.requestFocus();
                 System.out.println("utilisateur introuvable");
             }
 
@@ -80,11 +97,21 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void onForgotPassword(MouseEvent event) {
+    private void onForgotPassword(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("ForgotPasswordLogin.fxml"));
+            Stage s = new Stage();
+            Scene se = new Scene(root);
+            s.setScene(se);
+            Stage x = (Stage) Login.getScene().getWindow();
+            x.close();
+            s.show();
+       
     }
 
     @FXML
-    private void onSignup(MouseEvent event) {
-    }
+    private void onSignup(MouseEvent event) throws IOException {
+        
 
+    }
+        
 }

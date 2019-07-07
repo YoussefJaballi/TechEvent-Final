@@ -28,14 +28,14 @@ public class User extends Reportable {
     private RoleUser role;
     List<Participation> participations;
     private boolean isActivated;
+    private String phone;
 
-    public User(int id, String email, String name, String lastName, String login, String password, Date birthday, String adress, String photoURL, Entreprise entreprise, RoleUser role, boolean isActivated) {
+    public User(int id, String email, String name, String lastName, String login, String password, Date birthday, String adress, String photoURL, Entreprise entreprise, RoleUser role, boolean isActivated, String phone) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.lastName = lastName;
         this.login = login;
-        //generatePasswordHash(password);
         this.password = password;
         this.birthday = birthday;
         this.adress = adress;
@@ -43,9 +43,10 @@ public class User extends Reportable {
         this.entreprise = entreprise;
         this.role = role;
         this.isActivated = isActivated;
+        this.phone = phone;
     }
 
-    public User(String email, String name, String lastName, String login, String password, Date birthday, String adress, String photoURL, Entreprise entreprise, RoleUser role, boolean isActivated) {
+    public User(String email, String name, String lastName, String login, String password, Date birthday, String adress, String photoURL, Entreprise entreprise, RoleUser role, boolean isActivated, String phone) {
         this.email = email;
         this.name = name;
         this.lastName = lastName;
@@ -57,10 +58,12 @@ public class User extends Reportable {
         this.entreprise = entreprise;
         this.role = role;
         this.isActivated = isActivated;
+        this.phone = phone;
     }
 
     public User() {
     }
+    
 
     public int getId() {
         return id;
@@ -138,7 +141,7 @@ public class User extends Reportable {
         return entreprise;
     }
 
-    public void setEntrepriseID(Entreprise entrepriseID) {
+    public void setEntreprise(Entreprise entreprise) {
         this.entreprise = entreprise;
     }
 
@@ -146,7 +149,7 @@ public class User extends Reportable {
         return role;
     }
 
-    public void setRoleID(RoleUser role) {
+    public void setRole(RoleUser role) {
         this.role = role;
     }
 
@@ -166,17 +169,20 @@ public class User extends Reportable {
         this.isActivated = isActivated;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", email=" + email + ", name=" + name + ", lastName=" + lastName + ", login=" + login + ", password=" + password + ", birthday=" + birthday + ", adress=" + adress + ", photoURL=" + photoURL + ", entreprise=" + entreprise + ", role=" + role + ", participations=" + participations + ", isActivated=" + isActivated + '}';
+        return "User{" + "id=" + id + ", email=" + email + ", name=" + name + ", lastName=" + lastName + ", login=" + login + ", password=" + password + ", birthday=" + birthday + ", adress=" + adress + ", photoURL=" + photoURL + ", entreprise=" + entreprise + ", role=" + role + ", participations=" + participations + ", isActivated=" + isActivated + ", phone=" + phone + '}';
     }
-
-    public void setEntreprise(Entreprise entreprise) {
-        this.entreprise = entreprise;
-    }
-
-    public void setRole(RoleUser role) {
-        this.role = role;
-    }
+    
+    
+    
 
 }
