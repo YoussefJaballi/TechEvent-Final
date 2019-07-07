@@ -83,7 +83,7 @@ public class RegistrationForm2Controller implements Initializable {
 
     @FXML
     private void handleNextButtonAction(ActionEvent event) throws IOException {
-        if(NomTxt.getText() !=  null && PrenomTxt.getText() !=  null && DateNaissanceDate.getValue() != null && FileName != null)
+        if(NomTxt.getText() !=  null && PrenomTxt.getText() !=  null && DateNaissanceDate.getValue() != null)
         {
             
             UserManager.getRegisterUser().setName(NomTxt.getText());

@@ -14,5 +14,6 @@ import edu.esprit.models.User;
 public interface IUserService extends IService<User> {
 
     User login(String login, String password);
+    User findByLogin(String login);
 
 }

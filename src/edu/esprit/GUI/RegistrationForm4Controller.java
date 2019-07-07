@@ -51,6 +51,7 @@ public class RegistrationForm4Controller implements Initializable {
 
     @FXML
     private void handletFinishttonAction(ActionEvent event) {
+        
         if(LoginTxt.getText() != null && PasswordTxt.getText() !=  null && ConfirmPasswordTxt.getText().equals(PasswordTxt.getText()))
         {
             

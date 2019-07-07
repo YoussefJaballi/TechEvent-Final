@@ -13,6 +13,7 @@ import edu.esprit.models.User;
 import edu.esprit.services.IUserService;
 import edu.esprit.services.ServiceUtils;
 import edu.esprit.services.exeptions.ComposedIDExeption;
+import edu.esprit.utils.Hasher;
 import edu.esprit.utils.ServiceManager;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
@@ -31,14 +32,22 @@ public class UserService extends ServiceUtils implements IUserService {
                 .filter(c -> c.getId() == id)
                 .findFirst();
         return o.isPresent() ? o.get() : null;
+        
 
     }
 
-    public User authentication(String Login, String password) throws Exception {
+    /**
+     *
+     * @param Login
+     * @param password
+     * @return
+     */
+    @Override
+    public User login(String Login, String password){
 
         User c = null;
         try {
-            ResultSet rs = executeSelect("select * from user_account where  USER_LOGIN=" + Login + " and USER_PASSWORD=" + password + " and isdeleted=0");
+            ResultSet rs = executeSelect("select * from user_account where  USER_LOGIN='" + Login + "' and USER_PASSWORD='" + Hasher.generatePasswordHash(password) + "' and isdeleted=0");
             while (rs.next()) {
                 c = new User(rs.getInt("USER_ID_PK"),
                         rs.getString("USER_EMAIL"), rs.getString("USER_NAME"), rs.getString("USER_LAST_NAME"),
@@ -47,7 +56,8 @@ public class UserService extends ServiceUtils implements IUserService {
                         rs.getString("USER_ADRESS"), rs.getString("USER_PHOTO_URL"),
                         ServiceManager.getInstance().getEntrepriseService().find(rs.getInt("USER_ENTREPRISE_ID_FK")),
                         ServiceManager.getInstance().getRoleUserService().find(rs.getInt("USER_ROLE_ID_FK")),
-                        rs.getBoolean("USER_ACTIVATED")
+                        rs.getBoolean("USER_ACTIVATED"),
+                        rs.getString("USER_PHONE")
                 );
 
             }
@@ -72,7 +82,8 @@ public class UserService extends ServiceUtils implements IUserService {
                         rs.getString("USER_ADRESS"), rs.getString("USER_PHOTO_URL"),
                         ServiceManager.getInstance().getEntrepriseService().find(rs.getInt("USER_ENTREPRISE_ID_FK")),
                         ServiceManager.getInstance().getRoleUserService().find(rs.getInt("USER_ROLE_ID_FK")),
-                        rs.getBoolean("USER_ACTIVATED")
+                        rs.getBoolean("USER_ACTIVATED"),
+                        rs.getString("USER_PHONE")
                 );
 
               //  user.setReports(ServiceManager.getInstance().getReportService().findByUser(rs.getInt("USER_ID_PK")));
@@ -103,7 +114,7 @@ public class UserService extends ServiceUtils implements IUserService {
                 + "','" + obj.getName()
                 + "','" + obj.getLastName()
                 + "','" + obj.getLogin()
-                + "','" + obj.getPassword()
+                + "','" + Hasher.generatePasswordHash(obj.getPassword())
                 + "','" + obj.getBirthday().getDate() + "/" + (obj.getBirthday().getMonth() + 1) + "/" + (obj.getBirthday().getYear() - 100)
                 + "','" + obj.getAdress()
                 + "','" + obj.getPhotoURL()
@@ -131,9 +142,10 @@ public class UserService extends ServiceUtils implements IUserService {
                 + "`USER_NAME` ='" + obj.getName() + "',"
                 + "`USER_LAST_NAME` = '" + obj.getLastName() + "',"
                 + "`USER_LOGIN` = '" + obj.getLogin() + "',"
-                + "`USER_PASSWORD` = '" + obj.getPassword() + "',"
+                + "`USER_PASSWORD` = '" + Hasher.generatePasswordHash(obj.getPassword()) + "',"
                 + "`USER_BIRTHDATE` = '" + obj.getBirthday().getDate() + "/" + (obj.getBirthday().getMonth() + 1) + "/" + (obj.getBirthday().getYear() - 100) + "',"
-                + "`USER_ADRESS` = '" + obj.getAdress() + "'"
+                + "`USER_ADRESS` = '" + obj.getAdress() + "',"
+                + "`USER_ACTIVATED` = " + obj.isIsActivated() +" "
                 + "WHERE `USER_ID_PK` = " + obj.getId() + ";";
 
         return execute(req1);
@@ -145,13 +157,29 @@ public class UserService extends ServiceUtils implements IUserService {
     }
 
     @Override
-    public User login(String login, String password) {
-        System.out.println("login : "+login+" password : "+password);
-        System.out.println("user list : "+findAll());
-        Optional<User> o = findAll().stream()
-                .filter(c -> c.getLogin().equals(login) && c.getPassword().equals(password))
-                .findFirst();
-        return o.isPresent() ? o.get() : null;
+    public User findByLogin(String login) {
+                User c = null;
+        try {
+            ResultSet rs = executeSelect("select * from user_account where  USER_LOGIN='" + login + "' and isdeleted=0");
+            while (rs.next()) {
+                c = new User(rs.getInt("USER_ID_PK"),
+                        rs.getString("USER_EMAIL"), rs.getString("USER_NAME"), rs.getString("USER_LAST_NAME"),
+                        rs.getString("USER_LOGIN"), rs.getString("USER_PASSWORD"),
+                        new SimpleDateFormat("dd/mm/yy").parse(rs.getString("USER_BIRTHDATE")),
+                        rs.getString("USER_ADRESS"), rs.getString("USER_PHOTO_URL"),
+                        ServiceManager.getInstance().getEntrepriseService().find(rs.getInt("USER_ENTREPRISE_ID_FK")),
+                        ServiceManager.getInstance().getRoleUserService().find(rs.getInt("USER_ROLE_ID_FK")),
+                        rs.getBoolean("USER_ACTIVATED"),
+                        rs.getString("USER_PHONE")
+                );
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CommentService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return c;
     }
+
+  
 
 }

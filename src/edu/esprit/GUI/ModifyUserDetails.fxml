@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.esprit.GUI.ModifyUserDetailsController">
+  <children>
+    <Button id="PhotoButton" layoutX="81.0" layoutY="173.0"  prefWidth="109.0" text="Upload" />
+    <Label id="PhotoLabel" layoutX="27.0" layoutY="177.0" text="Photo" />
+    <Label layoutX="269.0" layoutY="22.0" text="Nom :" />
+    <Label layoutX="267.0" layoutY="53.0" text="Prénom :" />
+    <Label layoutX="267.0" layoutY="88.0" prefWidth="128.0" text="Date de naissance :" />
+     <DatePicker fx:id="DateNaissanceDate" layoutX="106.0" layoutY="228.0" />
+    <Label layoutX="267.0" layoutY="190.0" text="Email :" />
+    <ImageView id="img" fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+    <Label layoutX="267.0" layoutY="224.0" text="Adresse :" />
+  </children>
+</AnchorPane>

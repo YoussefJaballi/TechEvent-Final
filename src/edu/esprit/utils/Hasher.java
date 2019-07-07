@@ -13,7 +13,7 @@ import java.security.MessageDigest;
  */
 public class Hasher {
     
-    private static String generatePasswordHash(String pass) {
+    public static String generatePasswordHash(String pass) {
         String hashedPassword="";
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");

@@ -75,7 +75,8 @@ public class RegistrationForm3Controller implements Initializable {
 
     @FXML
     private void handleNextButtonAction(ActionEvent event) throws IOException {
-        if(AdresseTxt.getText() !=  null && EmailTxt.getText() !=  null && TelephoneTxt.getText() !=  null && EnterpriseComboBox.getValue() != null)
+//        if(AdresseTxt.getText() !=  null && EmailTxt.getText() !=  null && TelephoneTxt.getText() !=  null && EnterpriseComboBox.getValue() != null)
+        if(AdresseTxt.getText() !=  null && EmailTxt.getText() !=  null && TelephoneTxt.getText() !=  null)
         {
             Entreprise e = EnterpriseComboBox.getValue();
             System.out.println("enterprise from combobox : "+e);
