@@ -86,7 +86,7 @@ public class UserService extends ServiceUtils implements IUserService {
                         rs.getString("USER_PHONE")
                 );
 
-                user.setReports(ServiceManager.getInstance().getReportService().findByUser(rs.getInt("USER_ID_PK")));
+              //  user.setReports(ServiceManager.getInstance().getReportService().findByUser(rs.getInt("USER_ID_PK")));
 
                 l.add(user);
             }

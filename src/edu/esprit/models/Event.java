@@ -22,6 +22,15 @@ public class Event extends Reportable {
     private Category category;
     private double price;
     private List<Rating> ratings;
+
+    
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
     private List<Participation> participations;
     private List<Session> sessions;
     private List<Comment> comments;
