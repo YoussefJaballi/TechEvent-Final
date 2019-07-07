@@ -6,6 +6,8 @@
 package edu.esprit.GUI;
 
 import academiccalendar.ui.listcalendars.ListCalendarsController;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import edu.esprit.utils.UserManager;
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +20,11 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -117,11 +123,33 @@ public class RegistrationForm2Controller implements Initializable {
         photo = fileChooser.showOpenDialog(new Stage());
         FileName = photo.getAbsolutePath();
         //System.out.println(photo.getAbsolutePath());
-        sendFileToHTTP(photo,FileName);
+        sendFileToHTTP(photo);
     }
-    public static String sendFileToHTTP(File file, String fileName) throws MalformedURLException, IOException {
+    public void sendFileToHTTP(File file){
 
-        String newName = fileName + file.getName().substring(file.getName().indexOf("."));
+        
+         Map uploadResult = null;
+        Map<Object, Object> CONFIG = new HashMap<>();
+        CONFIG.put("cloud_name", "ddzyat9y5");
+        CONFIG.put("api_key", "337446516883967");
+        CONFIG.put("api_secret", "u1IQp__loijm2yxlwvLAsbj7ER4");
+
+        Cloudinary cloudinary = new Cloudinary(CONFIG);
+
+
+       
+        try {
+            uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+        } catch (IOException ex) {
+            System.out.println("cant upload");
+            Logger.getLogger(RegistrationForm2Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+          FileName = (String)uploadResult.get("public_id");
+          System.out.println("FileName : "+FileName);
+        
+        
+       /* String newName = fileName + file.getName().substring(file.getName().indexOf("."));
 
         String charset = "UTF-8";
 
@@ -153,7 +181,7 @@ public class RegistrationForm2Controller implements Initializable {
 // Request is lazily fired whenever you need to obtain information about response.
         int responseCode = ((HttpURLConnection) connection).getResponseCode();
         System.out.println(responseCode); // Should be 200
-        return (newName);
+        return (newName);*/
     }
     
 }

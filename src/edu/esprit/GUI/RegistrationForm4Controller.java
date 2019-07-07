@@ -11,13 +11,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -69,6 +73,13 @@ public class RegistrationForm4Controller implements Initializable {
                 Popup popup = new Popup(); 
                 alert.setContentText("creer avec succes");
                 alert.showAndWait();
+                Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            Stage s = new Stage();
+            Scene se = new Scene(root);
+            s.setScene(se);
+            Stage x = (Stage) LoginTxt.getScene().getWindow();
+            x.close();
+            s.show();
                 
             }
             catch(Exception e)
