@@ -75,7 +75,7 @@ public class UserService extends ServiceUtils implements IUserService {
                         rs.getBoolean("USER_ACTIVATED")
                 );
 
-                user.setReports(ServiceManager.getInstance().getReportService().findByUser(rs.getInt("USER_ID_PK")));
+              //  user.setReports(ServiceManager.getInstance().getReportService().findByUser(rs.getInt("USER_ID_PK")));
 
                 l.add(user);
             }
