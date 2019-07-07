@@ -157,7 +157,7 @@
                   <Tab text="Colors">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
+                          <children>
                               <VBox prefHeight="200.0" prefWidth="100.0" stylesheets="@../style/menuStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <Label alignment="CENTER" prefHeight="42.0" prefWidth="308.0" text="Color Manager:" />
@@ -180,7 +180,8 @@
                                                 <Insets right="30.0" />
                                              </padding>
                                           </HBox>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="43.0" prefWidth="304.0" spacing="20.0">
+                                          
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="43.0" prefWidth="304.0" spacing="20.0" visible="false">
                                              <children>
                                                 <Label text="Spring SEM: ">
                                                    <HBox.margin>
@@ -189,6 +190,7 @@
                                                 </Label>
                                                 <JFXColorPicker fx:id="springSemCP" accessibleRole="BUTTON" editable="true" prefHeight="24.0" prefWidth="50.0" promptText="Pick Color" />
                                                 <JFXCheckBox fx:id="springSemCheckBox" checkedColor="#777777" onAction="#handleCheckBoxAction" selected="true" text=" visible?" />
+                                               
                                              </children>
                                              <VBox.margin>
                                                 <Insets top="10.0" />
@@ -197,7 +199,8 @@
                                                 <Insets right="30.0" />
                                              </padding>
                                           </HBox>
-                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="73.0" prefHeight="43.0" prefWidth="304.0" spacing="20.0">
+                                          
+                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="73.0" prefHeight="43.0" prefWidth="304.0" spacing="20.0" visible="false">
                                              <children>
                                                 <Label text="Summer SEM: ">
                                                    <HBox.margin>
@@ -214,7 +217,7 @@
                                                 <Insets top="10.0" />
                                              </VBox.margin>
                                           </HBox>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="43.0" prefWidth="304.0" spacing="20.0">
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="43.0" prefWidth="304.0" spacing="20.0" visible="false">
                                              <children>
                                                 <Label text="All QTR: ">
                                                    <HBox.margin>
@@ -231,7 +234,7 @@
                                                 <Insets right="30.0" />
                                              </padding>
                                           </HBox>
-                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="85.0" prefHeight="43.0" prefWidth="304.0" spacing="20.0">
+                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="85.0" prefHeight="43.0" prefWidth="304.0" spacing="20.0" visible="false">
                                              <children>
                                                 <Label text="All MBA: ">
                                                    <HBox.margin>
@@ -265,7 +268,7 @@
                                                 <Insets right="30.0" />
                                              </padding>
                                           </HBox>
-                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="171.0" prefHeight="43.0" prefWidth="304.0" spacing="20.0">
+                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="171.0" prefHeight="43.0" prefWidth="304.0" spacing="20.0" visible="false">
                                              <children>
                                                 <Label text="All Campus: ">
                                                    <HBox.margin>
@@ -282,7 +285,7 @@
                                                 <Insets right="30.0" />
                                              </padding>
                                           </HBox>
-                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="214.0" prefHeight="43.0" prefWidth="304.0" spacing="20.0">
+                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="214.0" prefHeight="43.0" prefWidth="304.0" spacing="20.0" visible="false">
                                              <children>
                                                 <Label text="All Holiday: ">
                                                    <HBox.margin>
@@ -299,7 +302,7 @@
                                                 <Insets right="30.0" />
                                              </padding>
                                           </HBox>
-                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="391.0" prefHeight="43.0" prefWidth="304.0" spacing="20.0">
+                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="391.0" prefHeight="43.0" prefWidth="304.0" spacing="20.0" visible="false">
                                              <children>
                                                 <Label text="All TRA/TRB:">
                                                    <HBox.margin>
@@ -337,7 +340,8 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab text="Tools">
+                  <!--
+                  <Tab text="Tools" fx:id="toolsTab">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="235.0">
                            <children>
@@ -396,6 +400,7 @@
                         </AnchorPane>
                     </content>
                   </Tab>
+                  -->
                </tabs>
             </JFXTabPane>
          </left>

@@ -17,6 +17,7 @@ import academiccalendar.ui.listterms.ListTermsController;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.effects.JFXDepthManager;
+import edu.esprit.GUI.EventDetailsController;
 import edu.esprit.GUI.EventListController;
 import edu.esprit.GUI.HomeController;
 import edu.esprit.services.exeptions.ComposedIDExeption;
@@ -86,6 +87,7 @@ import edu.esprit.utils.UserManager;
 import java.text.ParseException;
 import java.util.stream.Collectors;
 import javafx.scene.Parent;
+import javafx.scene.control.Tab;
 import javafx.scene.control.Tooltip;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -174,6 +176,8 @@ public class FXMLDocumentController implements Initializable {
     //**************************************************************************
     // Events
     Connection cnx;
+    @FXML
+    private Tab toolsTab;
 
     private void addEvent(VBox day) {
 
@@ -213,7 +217,7 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    private void editEvent(VBox day, String descript, String termID) {
+    /*private void editEvent(VBox day, String descript, String termID) {
 
         // Store event fields in data singleton
         Label dayLbl = (Label) day.getChildren().get(0);
@@ -243,6 +247,22 @@ public class FXMLDocumentController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }*/
+    public void displayDetailsEvent(Integer eventID) {
+        System.out.println("academiccalendar.ui.main.FXMLDocumentController.displayDetailsEvent()");
+        AnchorPane content = null;
+        rootPane.getChildren().clear();
+        try {
+            EventDetailsController.eventID = eventID;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/esprit/GUI/EventDetails.fxml"));
+            Parent root = loader.load();
+            content = (AnchorPane) root;
+            content = FXMLLoader.load(getClass().getResource("/edu/esprit/GUI/EventDetails.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        rootPane.getChildren().add(content);
 
     }
 
@@ -535,11 +555,13 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void populateMonthWithEvents() {
-       /*recuperer liste des evenement a partir de list participation de user connecté,ensuite faire un map pour afficher les evenement dans laquelle l'utilisateur
+        /*recuperer liste des evenement a partir de list participation de user connecté,ensuite faire un map pour afficher les evenement dans laquelle l'utilisateur
        connecté est participer par eventId
-        */
+         */
         List<Event> le = null;
-        try {
+        //System.out.println("liste des participations : "+UserManager.getUser().getParticipations());
+
+        /*try {
             le = UserManager.getUser()
                     .getParticipations()
                     .stream()
@@ -551,17 +573,21 @@ public class FXMLDocumentController implements Initializable {
                         }
                     })
                     .collect(Collectors.toList());
+            
+            
+            
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
+        }*/
+        System.out.println("annes de calendrier"+Model.getInstance().calendar_start+" ---   "+Model.getInstance().calendar_end); 
+        le = ServiceManager.getInstance().getEventService().findAll();
+        System.out.println("liste des events : " + le);
         // Get viewing calendar
         String calendarName = Model.getInstance().calendar_name;
         String currentMonth = monthLabel.getText();
-
         int currentMonthIndex = Model.getInstance().getMonthIndex(currentMonth) + 1;
         int currentYear = Integer.parseInt(selectedYear.getValue());
-
+        System.out.println("anne selectionner"+currentYear);
         // Query to get ALL Events from the selected calendar!!
         //String getMonthEventsQuery = "SELECT * From EVENTS";
         // Store the results here
@@ -584,6 +610,7 @@ public class FXMLDocumentController implements Initializable {
             Date eventDate = new java.sql.Date(e.getSessions().get(0).getStartTime().getTime());
             String EventStartTime = new SimpleDateFormat("HH:mm").format(e.getSessions().get(0).getStartTime());
             String EventEndTime = new SimpleDateFormat("HH:mm").format(e.getSessions().get(0).getEndTime());
+            Integer EventID = e.getId();
             //Date eventDate = edate;
             //System.out.println(eventDate);
             //result.getDate("EventDate");
@@ -601,14 +628,14 @@ public class FXMLDocumentController implements Initializable {
                     int day = eventDate.toLocalDate().getDayOfMonth();
 
                     // Display decription of the event given it's day
-                    showDate(EventStartTime, EventEndTime, edate, day, eventDescript, eventTermID);
+                    showDate(EventID, EventStartTime, EventEndTime, edate, day, eventDescript, eventTermID);
                 }
             }
         }
 
     }
 
-    public void showDate(String EventStartTime, String EventEndTime, Date eventDate, int dayNumber, String descript, int termID) {
+    public void showDate(Integer EventID, String EventStartTime, String EventEndTime, Date eventDate, int dayNumber, String descript, int termID) {
 
         Image img = new Image(getClass().getClassLoader().getResourceAsStream("academiccalendar/ui/icons/icon2.png"));
         ImageView imgView = new ImageView();
@@ -642,8 +669,9 @@ public class FXMLDocumentController implements Initializable {
 
                     eventLbl.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
                         System.out.println("heeeey this is Event Date:   " + eventDate);
-                        editEvent((VBox) eventLbl.getParent(), eventLbl.getText(), eventLbl.getAccessibleText());
-
+                        System.out.println("this is event id " + EventID);
+                        displayDetailsEvent(EventID);
+                        //editEvent((VBox) eventLbl.getParent(), eventLbl.getText(), eventLbl.getAccessibleText());
                     });
 
                     eventLbl.addEventHandler(MouseEvent.MOUSE_ENTERED, (e) -> {
@@ -1034,7 +1062,6 @@ public class FXMLDocumentController implements Initializable {
 
     public void initializeCalendarGrid() {
         //AnchorPane content = null;
-
         // Go through each calendar grid location, or each "day" (7x6)
         int rows = 6;
         int cols = 7;
