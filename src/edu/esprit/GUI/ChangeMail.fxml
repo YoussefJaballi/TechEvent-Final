@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.esprit.GUI.ChangeMailController">
+  <children>
+    <Button fx:id="next" layoutX="240.0" layoutY="205.0" mnemonicParsing="false" onMouseClicked="#onNext" prefWidth="121.0" text="Suivant" />
+    <TextField fx:id="email" layoutX="200.0" layoutY="132.0" prefWidth="200.0" />
+    <Label layoutX="182.0" layoutY="76.0" prefWidth="237.0" text="Entrer votre nouvelle adresse mail :" />
+  </children>
+  <stylesheets>
+    <URL value="@changemail.css" />
+  </stylesheets>
+</AnchorPane>
