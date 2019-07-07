@@ -75,16 +75,16 @@ public class RegistrationForm3Controller implements Initializable {
 
     @FXML
     private void handleNextButtonAction(ActionEvent event) throws IOException {
-//        if(AdresseTxt.getText() !=  null && EmailTxt.getText() !=  null && TelephoneTxt.getText() !=  null && EnterpriseComboBox.getValue() != null)
-        if(AdresseTxt.getText() !=  null && EmailTxt.getText() !=  null && TelephoneTxt.getText() !=  null)
+        if(AdresseTxt.getText() !=  null && EmailTxt.getText() !=  null && TelephoneTxt.getText() !=  null && EnterpriseComboBox.getValue() != null)
         {
+            System.out.println("avent set phone number :"+TelephoneTxt.getText());
             Entreprise e = EnterpriseComboBox.getValue();
             System.out.println("enterprise from combobox : "+e);
             UserManager.getRegisterUser().setAdress(AdresseTxt.getText());
             UserManager.getRegisterUser().setEmail(EmailTxt.getText());
-            //propriete telephone inexistante
-            //UserManager.getRegisterUser().se
+            UserManager.getRegisterUser().setPhone(TelephoneTxt.getText());
             UserManager.getRegisterUser().setEntreprise(e);
+            System.out.println("apres set phone number :"+UserManager.getRegisterUser().getPhone());
             RegistrationForm3AnchorPane.getChildren().clear();
             AnchorPane content = null;
             content = FXMLLoader.load(getClass().getResource("RegistrationForm4.fxml"));
