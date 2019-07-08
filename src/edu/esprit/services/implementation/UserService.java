@@ -144,7 +144,6 @@ public class UserService extends ServiceUtils implements IUserService {
                 + "`USER_NAME` ='" + obj.getName() + "',"
                 + "`USER_LAST_NAME` = '" + obj.getLastName() + "',"
                 + "`USER_LOGIN` = '" + obj.getLogin() + "',"
-                + "`USER_PASSWORD` = '" + Hasher.generatePasswordHash(obj.getPassword()) + "',"
                 + "`USER_BIRTHDATE` = '" + obj.getBirthday().getDate() + "/" + (obj.getBirthday().getMonth() + 1) + "/" + (obj.getBirthday().getYear() - 100) + "',"
                 + "`USER_ADRESS` = '" + obj.getAdress() + "',"
                 + "`USER_ACTIVATED` = " + obj.isIsActivated() +" "
@@ -180,6 +179,15 @@ public class UserService extends ServiceUtils implements IUserService {
             Logger.getLogger(CommentService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return c;
+    }
+
+    @Override
+    public boolean editPassword(User obj) {
+         String req1 = "UPDATE `teck_event`.`user_account`"
+                + "SET"
+                + "`USER_PASSWORD` = '" + Hasher.generatePasswordHash(obj.getPassword()) + "',"
+                 + "WHERE `USER_ID_PK` = " + obj.getId() + ";";
+         return execute(req1);
     }
 
   
