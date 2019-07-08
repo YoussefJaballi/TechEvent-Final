@@ -12,23 +12,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import edu.esprit.models.Report;
-import edu.esprit.models.User;
 import java.util.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
-import edu.esprit.services.implementation.ReportService;
 import edu.esprit.utils.ServiceManager;
-import java.awt.Dialog;
-import java.util.List;
-import java.util.Properties;
-import java.util.stream.Collectors;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -36,7 +28,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 /**
@@ -80,15 +71,7 @@ public class ReportsController implements Initializable {
 
         reportsTable.setItems(allReports);
 
-       /* reporter_id.setCellValueFactory(e -> {
-            try {
-                return new ReadOnlyStringWrapper(ServiceManager.getInstance().getUserService().find(e.getValue().getReporterId()).getName());
-
-            } catch (Exception ex) {
-                e.printStackTrace();
-            }
-            return ""
-        });*/
+        reporter_id.setCellValueFactory(e -> new ReadOnlyStringWrapper(e.getValue().getReporterId().getName()));
         target.setCellValueFactory(new PropertyValueFactory<>("targettype"));
         target_id.setCellValueFactory(new PropertyValueFactory<>("targetId"));
         reportsTable.getSelectionModel().selectedItemProperty().addListener(e -> this.getSelectedreport());
