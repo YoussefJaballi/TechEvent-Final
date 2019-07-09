@@ -7,8 +7,10 @@ package edu.esprit.GUI;
 
 import static edu.esprit.GUI.ForgotPasswordConfirmationController.userToConfirm;
 import edu.esprit.models.User;
+import edu.esprit.utils.CheckPassword;
 import edu.esprit.utils.Hasher;
 import edu.esprit.utils.ServiceManager;
+import edu.esprit.utils.UserManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -49,11 +51,11 @@ public class ForgotPasswordController implements Initializable {
 
     @FXML
     private void onValidNewPassword(MouseEvent event) throws IOException {
-       if(!Hasher.generatePasswordHash(passTxt.getText()).equals(user.getPassword())){
+       if(CheckPassword.isValid(passTxt.getText())){
+        if(!Hasher.generatePasswordHash(passTxt.getText()).equals(UserManager.getUser().getPassword())){
         if(passTxt.getText().equals(passTxtConf.getText())){
-            user.setPassword(passTxt.getText());
-            ServiceManager.getInstance().getUserService().editPassword(user);
-            ForgotPasswordController.user=userToConfirm;
+            UserManager.getUser().setPassword(passTxt.getText());
+            ServiceManager.getInstance().getUserService().editPassword(UserManager.getUser());
             Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
             Stage s = new Stage();
             Scene se = new Scene(root);
@@ -75,6 +77,13 @@ public class ForgotPasswordController implements Initializable {
             passTxt.requestFocus();
            
        }
+        }else {
+           Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Votre mot de passe est invalide !\n un mot de passe doit contenir au minimum 8 caracteres.\n"
+                    + " au moins une lettre miniscule, au moins une lettre majuscule et un chiffre de 0 à 9");
+            alert.showAndWait();
+            passTxt.requestFocus(); 
+        }
     }
     
 }

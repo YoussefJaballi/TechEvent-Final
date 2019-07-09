@@ -47,8 +47,8 @@ public class ForgotPasswordConfirmationController implements Initializable {
         // TODO
         code = CodeGeneration.usingMathClass();
         try {
-            System.out.println(userToConfirm.getEmail());
-            ServiceMail.sendMail(userToConfirm.getEmail(), "Confirmation de reinitialisation du mot de passe", "Code de confirmation : " + code);
+            System.out.println(UserManager.getUser().getEmail());
+            ServiceMail.sendMail(UserManager.getUser().getEmail(), "Confirmation de reinitialisation du mot de passe", "Code de confirmation : " + code);
         } catch (MessagingException ex) {
             Logger.getLogger(ForgotPasswordConfirmationController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -59,7 +59,6 @@ public class ForgotPasswordConfirmationController implements Initializable {
     private void onValidateCode(MouseEvent event) throws IOException {
         if (confirmationTxt.getText().equals(code)) {
 
-            ForgotPasswordController.user=userToConfirm;
             Parent root = FXMLLoader.load(getClass().getResource("ForgotPassword.fxml"));
             Stage s = new Stage();
             Scene se = new Scene(root);

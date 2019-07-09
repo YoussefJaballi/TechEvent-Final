@@ -10,6 +10,7 @@ import edu.esprit.utils.CodeGeneration;
 import edu.esprit.utils.ServiceMail;
 import edu.esprit.utils.ServiceManager;
 import edu.esprit.utils.UserManager;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,12 +24,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.mail.MessagingException;
 
@@ -39,7 +44,7 @@ import javax.mail.MessagingException;
  */
 public class ModifyUserDetailsController implements Initializable {
 
-    
+    private File photo;
     @FXML
     private TextField emailTxt;
     @FXML
@@ -55,7 +60,9 @@ public class ModifyUserDetailsController implements Initializable {
     @FXML
     private Button changeMail;
     @FXML
-    private AnchorPane screen;
+    private Label photoPathLabel;
+    @FXML
+    private ImageView img;
 
     /**
      * Initializes the controller class.
@@ -65,6 +72,8 @@ public class ModifyUserDetailsController implements Initializable {
         emailTxt.setText(UserManager.getUser().getEmail());
         adresseTxt.setText(UserManager.getUser().getAdress());
         telTxt.setText(UserManager.getUser().getPhone());
+        Image i = new Image("https://res.cloudinary.com/ddzyat9y5/image/upload/v1561911958/" + UserManager.getUser().getPhotoURL());
+            this.img.setImage(i);
        
     }    
 
@@ -104,6 +113,16 @@ public class ModifyUserDetailsController implements Initializable {
                     Scene se = new Scene(root);
                     s.setScene(se);
                     s.show();
+    }
+
+    @FXML
+    private void onBrowseClick(MouseEvent event) {
+        
+        UserManager.getUser().setPhotoURL(photoPathLabel.getText());
+         FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir une photo");
+        photo = fileChooser.showOpenDialog(new Stage());
+        this.photoPathLabel.setText(photo.getAbsolutePath());
     }
 
     

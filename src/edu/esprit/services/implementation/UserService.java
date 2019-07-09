@@ -183,8 +183,9 @@ public class UserService extends ServiceUtils implements IUserService {
     public boolean editPassword(User obj) {
          String req1 = "UPDATE `teck_event`.`user_account`"
                 + "SET"
-                + "`USER_PASSWORD` = '" + Hasher.generatePasswordHash(obj.getPassword()) + "',"
+                + "`USER_PASSWORD` = '" + Hasher.generatePasswordHash(obj.getPassword()) + "'"
                  + "WHERE `USER_ID_PK` = " + obj.getId() + ";";
+         System.out.println(req1);
          return execute(req1);
     }
 

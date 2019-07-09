@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -65,6 +66,8 @@ public class UserDetailsController implements Initializable {
         email.setText(UserManager.getUser().getEmail());
         adresse.setText(UserManager.getUser().getAdress());
         tel.setText(UserManager.getUser().getPhone());
+        Image i = new Image("https://res.cloudinary.com/ddzyat9y5/image/upload/v1561911958/" + UserManager.getUser().getPhotoURL());
+            this.img.setImage(i);
         
         
     }

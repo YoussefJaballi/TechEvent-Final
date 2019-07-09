@@ -9,11 +9,10 @@
 
 <AnchorPane id="AnchorPane" prefHeight="580.0" prefWidth="755.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.esprit.GUI.ModifyUserDetailsController">
   <children>
-    <Button id="PhotoButton" layoutX="81.0" layoutY="173.0" prefWidth="109.0" text="Upload" />
-    <Label id="PhotoLabel" layoutX="7.0" layoutY="177.0" prefWidth="60.0" text="Photo :" />
-    <DatePicker fx:id="DateNaissanceDate" layoutX="106.0" layoutY="228.0" />
+    <Button id="PhotoButton" layoutX="60.0" layoutY="195.0" onMouseClicked="#onBrowseClick" prefWidth="109.0" text="Parcourir" />
+    <Label id="PhotoLabel" fx:id="photoPathLabel" layoutX="14.0" layoutY="168.0" prefWidth="200.0" text="" />
     <Label layoutX="269.0" layoutY="71.0" text="Email :" />
-    <ImageView id="img" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
     <Label layoutX="269.0" layoutY="158.0" text="Adresse :" />
     <TextField id="prenomTxt" fx:id="emailTxt" editable="false" layoutX="415.0" layoutY="68.0" prefWidth="200.0" />
     <TextArea fx:id="adresseTxt" layoutX="416.0" layoutY="158.0" prefHeight="110.0" prefWidth="309.0" wrapText="true" />

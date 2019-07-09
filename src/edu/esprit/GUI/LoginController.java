@@ -46,16 +46,16 @@ public class LoginController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) throws Exception {
 
-        UserService us = new UserService();
+        
         try {
-            System.out.println(Pasword.getText());
+            System.out.println(Login.getText());
             User u = ServiceManager.getInstance().getUserService().login(Login.getText(), Pasword.getText());
             if (u != null) {
                 System.out.println(u);
                 if (u.isIsActivated())
                 {
                     UserManager.setUser(u);
-                    UserManager.setParticipation(ServiceManager.getInstance().getParticipationService().findByUser(u.getId()));
+                    UserManager.setParticipation(ServiceManager.getInstance().getParticipationService().findByUser(UserManager.getUser().getId()));
                     Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
                     Stage s = new Stage();
                     Scene se = new Scene(root);
@@ -64,7 +64,6 @@ public class LoginController implements Initializable {
                     x.close();
                     s.show();
                 }else{
-                   ValidateUserController.userToConfirm=u;
                     Parent root = FXMLLoader.load(getClass().getResource("ValidateUser.fxml"));
                     Stage s = new Stage();
                     Scene se = new Scene(root);

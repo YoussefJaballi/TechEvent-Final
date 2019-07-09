@@ -9,6 +9,7 @@ import com.cloudinary.Cloudinary;
 import edu.esprit.utils.ServiceManager;
 import java.util.Map;
 import com.cloudinary.utils.ObjectUtils;
+import edu.esprit.utils.CheckMailAddress;
 import java.io.File;
 
 /**
@@ -23,11 +24,7 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-        File file = new File("my_image.jpg");
-        Map uploadResult;
-        Cloudinary cloudinary = new Cloudinary();
-
-        uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+        CheckMailAddress.isValid("ayubfix@gmail.com");
     }
 
 }

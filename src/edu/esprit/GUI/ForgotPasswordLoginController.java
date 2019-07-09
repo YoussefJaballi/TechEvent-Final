@@ -7,6 +7,7 @@ package edu.esprit.GUI;
 
 import edu.esprit.models.User;
 import edu.esprit.utils.ServiceManager;
+import edu.esprit.utils.UserManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,14 +42,14 @@ public class ForgotPasswordLoginController implements Initializable {
 
     @FXML
     private void onNext(MouseEvent event) throws IOException {
-        User u = ServiceManager.getInstance().getUserService().findByLogin(loginTxt.getText());
-        if(u==null){
+ 
+         UserManager.setUser(ServiceManager.getInstance().getUserService().findByLogin(loginTxt.getText()));
+        if(UserManager.getUser()==null){
             Alert alert = new Alert(Alert.AlertType.WARNING);
               alert.setContentText("Code invalid !!");
             alert.showAndWait();
             loginTxt.requestFocus();
         } else{
-            ForgotPasswordConfirmationController.userToConfirm=u;
             Parent root = FXMLLoader.load(getClass().getResource("ForgotPasswordConfirmation.fxml"));
                     Stage s = new Stage();
                     Scene se = new Scene(root);
