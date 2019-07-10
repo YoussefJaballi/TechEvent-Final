@@ -6,13 +6,26 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+<?import javafx.scene.image.*?>
 <AnchorPane fx:id="RegistrationAnchropane" id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.GUI.RegistrationForm1Controller">
     <stylesheets>
-        <URL value="@registrationform1.css"/>
+        <URL value="@theme.css"/>
     </stylesheets>
-    <Button fx:id="button" layoutX="106.0" layoutY="125.0" onAction="#handleNextButtonAction" text="Suivant" />
+   <VBox fx:id="RegistrationVbox" >
     <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
-    <ComboBox fx:id="RoleComboBox" layoutX="106.0" layoutY="28.0" />
-    <Label fx:id="RoleLabel" layoutX="26.0" layoutY="32.0" text="Role" />
+    <TitledPane fx:id="RegistrationTitledPane">
+    <VBox>
+    <GridPane fx:id="RegistrationGridPane">
+    <Label fx:id="RoleLabel"  GridPane.columnIndex="0" GridPane.rowIndex="0" text="Role" />
+    <ComboBox fx:id="RoleComboBox"  GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    </GridPane>
+    <Button fx:id="button" layoutX="3526.0" onAction="#handleNextButtonAction" text="Suivant" />
+    <ImageView fx:id="ProfileImg" fitHeight="650.0" fitWidth="1200.666666666666664" layoutX="718.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" />
+            </image>
+        </ImageView>
+    </VBox>
+    </TitledPane>
+    </VBox>
 </AnchorPane>

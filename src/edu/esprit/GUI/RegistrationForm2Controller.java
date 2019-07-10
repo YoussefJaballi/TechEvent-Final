@@ -30,6 +30,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -76,7 +77,7 @@ public class RegistrationForm2Controller implements Initializable {
     @FXML
     private AnchorPane RegistrationForm2AnchorPane;
     
-    
+    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
    
     
     /**
@@ -89,7 +90,7 @@ public class RegistrationForm2Controller implements Initializable {
 
     @FXML
     private void handleNextButtonAction(ActionEvent event) throws IOException {
-        if(NomTxt.getText() !=  null && PrenomTxt.getText() !=  null && DateNaissanceDate.getValue() != null)
+        if(NomTxt.getText() !=  null && PrenomTxt.getText() !=  null && DateNaissanceDate.getValue() != null && FileName != null)
         {
             
             UserManager.getRegisterUser().setName(NomTxt.getText());
@@ -111,14 +112,21 @@ public class RegistrationForm2Controller implements Initializable {
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             stage.setScene(scene);
-            stage.show();*/
+            stage.show();*/   
+        }
+        else
+        {
+            
+            alert.setContentText("veuillez remplir tous les champs");
+            alert.showAndWait();
+            
             
         }
     }
 
     @FXML
     private void handlePhotoButtonAction(ActionEvent event) throws IOException {
-        FileChooser fileChooser = new FileChooser();
+       FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir une photo");
         photo = fileChooser.showOpenDialog(new Stage());
         FileName = photo.getAbsolutePath();
@@ -127,18 +135,20 @@ public class RegistrationForm2Controller implements Initializable {
     }
     public void sendFileToHTTP(File file){
 
-        
+        //creer une Map qui contient la parameters de configuration de cloudinary
          Map uploadResult = null;
         Map<Object, Object> CONFIG = new HashMap<>();
         CONFIG.put("cloud_name", "ddzyat9y5");
         CONFIG.put("api_key", "337446516883967");
         CONFIG.put("api_secret", "u1IQp__loijm2yxlwvLAsbj7ER4");
-
+        //cloudinry est une API 
+        //instancier un objet cloudinary avec les configs données
         Cloudinary cloudinary = new Cloudinary(CONFIG);
 
 
        
         try {
+            //utiliser la methode uploader pour importer une photo sur un serveur cloudinry
             uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
         } catch (IOException ex) {
             System.out.println("cant upload");
@@ -150,34 +160,26 @@ public class RegistrationForm2Controller implements Initializable {
         
         
        /* String newName = fileName + file.getName().substring(file.getName().indexOf("."));
-
         String charset = "UTF-8";
-
         String boundary = Long.toHexString(System.currentTimeMillis()); // Just generate some unique random value.
         String CRLF = "\r\n"; // Line separator required by multipart/form-data.
-
         URLConnection connection = new URL(URL).openConnection();
         connection.setDoOutput(true);
         connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-
         try (
                 OutputStream output = connection.getOutputStream();
                 PrintWriter writer = new PrintWriter(new OutputStreamWriter(output, charset), true);) {
-
             // Send  file.
             writer.append("--" + boundary).append(CRLF);
             writer.append("Content-Disposition: form-data; name=\"" + "image" + "\"; filename=\"" + newName + "\"").append(CRLF);
             writer.append("Content-Type: text/html; charset=UTF-8 ").append(CRLF);
-
             writer.append(CRLF).flush();
             Files.copy(file.toPath(), output);
             output.flush(); // Important before continuing with writer!
             writer.append(CRLF).flush(); // CRLF is important! It indicates end of boundary.
-
             // End of multipart/form-data.
             writer.append("--" + boundary + "--").append(CRLF).flush();
         }
-
 // Request is lazily fired whenever you need to obtain information about response.
         int responseCode = ((HttpURLConnection) connection).getResponseCode();
         System.out.println(responseCode); // Should be 200

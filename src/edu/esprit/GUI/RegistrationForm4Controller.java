@@ -11,17 +11,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -44,13 +40,30 @@ public class RegistrationForm4Controller implements Initializable {
     private TextField ConfirmPasswordTxt;
     @FXML
     private Label ConfirmPasswordLabel;
+    
+    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        ConfirmPasswordTxt.focusedProperty().addListener((ov, oldV, newV) -> {
+            if (!newV) {
+                 if(!(ConfirmPasswordTxt.getText().isEmpty()))
+                {
+                //using regex phone number validation
+                        if (!(ConfirmPasswordTxt.getText().equals(PasswordTxt.getText()))) {
+                            //&&!(TelephoneTxt.getText().substring(0, 4).equals("216"))
+                            
+                alert.setContentText("les 2 mots de passe ne sont pas identiques");
+                alert.showAndWait();                    
+                            ConfirmPasswordTxt.setText("");
+                             }
+                }
+             
+            }
+        });
     }    
 
     @FXML
@@ -70,22 +83,14 @@ public class RegistrationForm4Controller implements Initializable {
             {
                 ServiceManager.getInstance().getUserService().create(UserManager.getRegisterUser());
                 
-                Popup popup = new Popup(); 
                 alert.setContentText("creer avec succes");
                 alert.showAndWait();
-                Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-            Stage s = new Stage();
-            Scene se = new Scene(root);
-            s.setScene(se);
-            Stage x = (Stage) LoginTxt.getScene().getWindow();
-            x.close();
-            s.show();
                 
             }
             catch(Exception e)
             {
                 
-                alert.setContentText("echec");
+                alert.setContentText("echec de validation a cause de "+e.getMessage());
                 alert.showAndWait();
                 e.printStackTrace();
             }

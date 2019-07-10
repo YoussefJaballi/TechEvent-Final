@@ -108,7 +108,6 @@ public class UserService extends ServiceUtils implements IUserService {
                 + "`USER_ADRESS`,"
                 + "`USER_PHOTO_URL`,"
                 + "`USER_ENTREPRISE_ID_FK`,"
-                + "`USER_PHONE`,"
                 + "`USER_ROLE_ID_FK`)"
                 + " values ("
                 + "'" + obj.getEmail()
@@ -120,7 +119,6 @@ public class UserService extends ServiceUtils implements IUserService {
                 + "','" + obj.getAdress()
                 + "','" + obj.getPhotoURL()
                 + "'," + obj.getEntreprise().getId()
-                + "," + obj.getPhone()
                 + "," + obj.getRole().getId()
                 + ");";
 

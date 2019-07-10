@@ -114,7 +114,8 @@ public class EventListController implements Initializable {
     }
 
     public void setFilter(String filter) {
-        this.filterField.setText(filter);
+        System.out.println("this is filter : "+filter);
+        this.filterField.setText(""+filter);
     }
 
     @FXML

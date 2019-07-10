@@ -9,13 +9,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.esprit.GUI.RegistrationForm4Controller">
   <stylesheets>
-    <URL value="@registrationform4.css" />
+    <URL value="@theme.css" />
   </stylesheets>
   <Button fx:id="button" layoutX="199.0" layoutY="325.0" onAction="#handletFinishttonAction" text="Terminer" />
   <TextField fx:id="LoginTxt" layoutX="106.0" layoutY="28.0" />
   <Label fx:id="LoginLabel" layoutX="26.0" layoutY="32.0" text="Login" />
-  <TextField fx:id="PasswordTxt" layoutX="106.0" layoutY="128.0" />
+  <PasswordField fx:id="PasswordTxt" layoutX="106.0" layoutY="128.0" />
   <Label fx:id="PasswordLabel" layoutX="26.0" layoutY="132.0" text="Mot de passe" />
-  <TextField fx:id="ConfirmPasswordTxt" layoutX="100.0" layoutY="228.0" />
+  <PasswordField fx:id="ConfirmPasswordTxt" layoutX="100.0" layoutY="228.0" />
   <Label fx:id="ConfirmPasswordLabel" layoutX="26.0" layoutY="232.0" text="Confirmer mot de passe" />
 </AnchorPane>

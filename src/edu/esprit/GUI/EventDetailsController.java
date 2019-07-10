@@ -79,10 +79,15 @@ public class EventDetailsController implements Initializable, MapComponentInitia
     protected GoogleMap Gmap;
     private MarkerOptions markerOptions2;
     private Marker myMarker2;
+    @FXML
     private Label titre;
+    @FXML
     private Label description;
+    @FXML
     private Label organisateur;
+    @FXML
     private Label categorie;
+    @FXML
     private AnchorPane map;
     @FXML
     private TableView<ObservableSession> table;
@@ -95,20 +100,14 @@ public class EventDetailsController implements Initializable, MapComponentInitia
     private ObservableList<ObservableSession> filtredSessionList = FXCollections.observableArrayList();
     @FXML
     private ImageView img;
+    @FXML
     private Button supprimer;
     @FXML
     private Button modifier;
+    @FXML
     private Button reportButton;
     @FXML
     private HBox buttonContainer;
-    @FXML
-    private Label nom;
-    @FXML
-    private Label prenom;
-    @FXML
-    private Label adresse;
-    @FXML
-    private Label email;
 
     /**
      * Initializes the controller class.
@@ -232,6 +231,7 @@ public class EventDetailsController implements Initializable, MapComponentInitia
         }
     }
 
+    @FXML
     private void supprimerEvent(MouseEvent ev) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");

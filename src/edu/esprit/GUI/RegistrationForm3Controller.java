@@ -12,12 +12,15 @@ import edu.esprit.utils.ServiceManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -57,11 +60,18 @@ public class RegistrationForm3Controller implements Initializable {
     private ObservableList<Entreprise> enterprises = FXCollections.observableArrayList();
     @FXML
     private Label EnterpriseLabel;
+    
+    
+     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         alert.setTitle("Information Dialog");
+         alert.setHeaderText("user");
+        
         if(UserManager.getRegisterUser().getRole().getDescription().equals("Event_Creator"))
         {
         this.initEnterprises();
@@ -71,20 +81,66 @@ public class RegistrationForm3Controller implements Initializable {
         RegistrationForm3AnchorPane.getChildren().remove(EnterpriseLabel);
         RegistrationForm3AnchorPane.getChildren().remove(EnterpriseComboBox);
         }
+        
+        /*EmailTxt.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+             if ( (EmailTxt.getText() == null)||(!EmailTxt.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$" )) ) {
+                 System.out.println("invalid mail");
+            }
+            }
+        });*/
+        
+        EmailTxt.focusedProperty().addListener((ov, oldV, newV) -> {
+            //focus perdu
+            if (!newV) {
+                if(!(EmailTxt.getText().isEmpty()))
+                {
+                //Java fournit dans son JDK depuis la version 1.4 une API standard permettant la manipulation d'expressions régulières.
+                //using regex email validation
+                //methode matches : Cette méthode retourne true si, et seulement si, cette chaîne correspond à l'expression regex donnée.
+                        if ((!EmailTxt.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$" ))) {
+                alert.setContentText("adresse email est invalide");
+                alert.showAndWait();                    
+                            EmailTxt.setText("");
+                             }
+                }
+                
+             
+            }
+        });
+        
+        
+        TelephoneTxt.focusedProperty().addListener((ov, oldV, newV) -> {
+            if (!newV) {
+                 if(!(TelephoneTxt.getText().isEmpty()))
+                {
+                //using regex phone number validation
+                        if (!(TelephoneTxt.getText().matches("^(?=(?:[8-9]){1})(?=[0-9]{8}).*")) ||   TelephoneTxt.getText().length() != 8 ) {
+                            //&&!(TelephoneTxt.getText().substring(0, 4).equals("216"))
+                            
+                alert.setContentText("numero de telephone est invalide");
+                alert.showAndWait();                    
+                            TelephoneTxt.setText("");
+                             }
+                }
+             
+            }
+        });
     }    
 
     @FXML
     private void handleNextButtonAction(ActionEvent event) throws IOException {
         if(AdresseTxt.getText() !=  null && EmailTxt.getText() !=  null && TelephoneTxt.getText() !=  null && EnterpriseComboBox.getValue() != null)
         {
-            System.out.println("avent set phone number :"+TelephoneTxt.getText());
             Entreprise e = EnterpriseComboBox.getValue();
             System.out.println("enterprise from combobox : "+e);
             UserManager.getRegisterUser().setAdress(AdresseTxt.getText());
             UserManager.getRegisterUser().setEmail(EmailTxt.getText());
-            UserManager.getRegisterUser().setPhone(TelephoneTxt.getText());
+            UserManager.getRegisterUser().setPhone("216"+TelephoneTxt.getText());
             UserManager.getRegisterUser().setEntreprise(e);
-            System.out.println("apres set phone number :"+UserManager.getRegisterUser().getPhone());
             RegistrationForm3AnchorPane.getChildren().clear();
             AnchorPane content = null;
             content = FXMLLoader.load(getClass().getResource("RegistrationForm4.fxml"));
@@ -92,7 +148,15 @@ public class RegistrationForm3Controller implements Initializable {
             System.out.println("user enterprise:  "+UserManager.getRegisterUser().getEntreprise());
             System.out.println("user details interface 3:   "+UserManager.getRegisterUser());
         }
+        else
+        {
+                alert.setContentText("veuillez remplir tous les champs");
+                alert.showAndWait();  
+            
+        }
     }
+    
+    
     
     
     private void initEnterprises() {
