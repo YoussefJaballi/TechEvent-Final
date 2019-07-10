@@ -9,6 +9,7 @@ import edu.esprit.models.Report;
 import edu.esprit.services.IReportService;
 import edu.esprit.services.ServiceUtils;
 import edu.esprit.services.exeptions.ComposedIDExeption;
+import edu.esprit.utils.ServiceManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class ReportService extends ServiceUtils implements IReportService {
             ResultSet rs = executeSelect("select * from report where  REPORT_ID_PK=" + id + " and isdeleted=0");
             while (rs.next()) {
                 c = new Report(rs.getInt("REPORT_ID_PK"),
-                        rs.getInt("REPORTER_ID_FK"),
+                       ServiceManager.getInstance().getUserService().find(rs.getInt("REPORTER_ID_FK")),
                         rs.getString("REPORT_BODY"),
                         rs.getInt("REPORT_TARGET_ID"),
                         rs.getString("REPORT_TARGET"));
@@ -50,7 +51,7 @@ public class ReportService extends ServiceUtils implements IReportService {
 
             while (rs.next()) {
                 Report reportevent = new Report(rs.getInt("REPORT_ID_PK"),
-                        rs.getInt("REPORTER_ID_FK"),
+                       ServiceManager.getInstance().getUserService().find(rs.getInt("REPORTER_ID_FK")),
                         rs.getString("REPORT_BODY"),
                         rs.getInt("REPORT_TARGET_ID"),
                         rs.getString("REPORT_TARGET"));
@@ -116,7 +117,7 @@ public class ReportService extends ServiceUtils implements IReportService {
     @Override
     public List<Report> findByUser(int id) {
         return findAll().stream()
-                .filter(c -> c.getTargettype().equals("user") && c.getReporterId() == id)
+                .filter(c -> c.getTargettype().equals("user") && c.getReporterId().getId() == id)
                 .collect(Collectors.toList());
     }
 

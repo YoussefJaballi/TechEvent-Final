@@ -12,12 +12,12 @@ package edu.esprit.models;
 public class Report {
 
     private int id;
-    private int reporterId;
+    private User reporterId;
     private String body;
     private int targetId;
     private String targettype;
 
-    public Report(int id, int reporterId, String body, int targetId, String targettype) {
+    public Report(int id, User reporterId, String body, int targetId, String targettype) {
         this.id = id;
         this.reporterId = reporterId;
         this.body = body;
@@ -25,7 +25,7 @@ public class Report {
         this.targettype = targettype;
     }
 
-    public Report(int reporterId, String body, int targetId, String targettype) {
+    public Report(User reporterId, String body, int targetId, String targettype) {
         this.reporterId = reporterId;
         this.body = body;
         this.targetId = targetId;
@@ -40,11 +40,11 @@ public class Report {
         this.id = id;
     }
 
-    public int getReporterId() {
+    public User getReporterId() {
         return reporterId;
     }
 
-    public void setReporterId(int reporterId) {
+    public void setReporterId(User reporterId) {
         this.reporterId = reporterId;
     }
 
