@@ -556,8 +556,7 @@ public class FXMLDocumentController implements Initializable {
             e.printStackTrace();
         }*/
         le = ServiceManager.getInstance().getEventService().findAll();
-        
-        //System.out.println("liste des participations : " + UserManager.getUser().getParticipations());
+        System.out.println("liste des participations : " + UserManager.getUser().getParticipations());
         System.out.println("les events de eventcreator : " + le);
         // Get viewing calendar
         String calendarName = Model.getInstance().calendar_name;
@@ -1041,8 +1040,6 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    
-    //editer par youssef jaballi : cette methode est utiliser pour initialiser la calendar 
     public void initializeCalendarGrid() {
         //AnchorPane content = null;
 
@@ -1056,9 +1053,7 @@ public class FXMLDocumentController implements Initializable {
                 VBox vPane = new VBox();
                 vPane.getStyleClass().add("calendar_pane");
                 vPane.setMinWidth(weekdayHeader.getPrefWidth() / 7);
-                //editer par youssef jaballi : cette methode est declencher quand tu clique sur le Vbox de calendar
                 vPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
-                    //editer par youssef jaballi : lb1 contient le jour selectionner suivant l'indice j
                     Label lbl = (Label) vPane.getChildren().get(0);
                     Integer day = Integer.parseInt(lbl.getText());
                     Integer month = Model.getInstance().getMonthIndex(monthSelect.getSelectionModel().getSelectedItem()) + 1;
@@ -1096,12 +1091,11 @@ public class FXMLDocumentController implements Initializable {
             calendarGrid.getRowConstraints().add(row);
         }
     }
-    //ajouter par youssef jaballi : cette methode est utiliser pour afficher les details d'une event quand tu clique sur une evenement
+
     public void displayEventDetails(Integer eventId) throws IOException {
-        //passer l'identifiant d'événement vers le contrôleur nommé EventDetailsController
+        System.out.println("display event details");
         EventDetailsController.eventID = eventId;
         try {
-            //ajouter par youssef jaballi : instancier un nouveau AnchorPane et remplir dans l'Anchorpane de calendar nommé "rootPane" 
             this.rootPane = new AnchorPane();
             AnchorPane root = FXMLLoader.load(getClass().getResource("/edu/esprit/GUI/EventDetails.fxml"));
             HomeController.instance.setContent(root);

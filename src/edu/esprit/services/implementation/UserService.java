@@ -47,7 +47,7 @@ public class UserService extends ServiceUtils implements IUserService {
 
         User c = null;
         try {
-            ResultSet rs = executeSelect("select * from user_account where  USER_LOGIN='" + Login + "' and USER_PASSWORD='" + Hasher.generatePasswordHash(password) + "' and isdeleted=0");
+            ResultSet rs = executeSelect("select * from user_account where  USER_LOGIN='" + Login + "' and USER_PASSWORD='" + password + "' and isdeleted=0");
             while (rs.next()) {
                 c = new User(rs.getInt("USER_ID_PK"),
                         rs.getString("USER_EMAIL"), rs.getString("USER_NAME"), rs.getString("USER_LAST_NAME"),
@@ -86,7 +86,7 @@ public class UserService extends ServiceUtils implements IUserService {
                         rs.getString("USER_PHONE")
                 );
 
-              //  user.setReports(ServiceManager.getInstance().getReportService().findByUser(rs.getInt("USER_ID_PK")));
+                user.setReports(ServiceManager.getInstance().getReportService().findByUser(rs.getInt("USER_ID_PK")));
 
                 l.add(user);
             }
@@ -124,11 +124,11 @@ public class UserService extends ServiceUtils implements IUserService {
 
         boolean r = execute(sql);
 
-        /*for (Participation p : obj.getParticipations()) {
+        for (Participation p : obj.getParticipations()) {
             if (!ServiceManager.getInstance().getParticipationService().create(p)) {
                 r = false;
             }
-        }*/
+        }
 
         return r;
     }
@@ -142,6 +142,7 @@ public class UserService extends ServiceUtils implements IUserService {
                 + "`USER_NAME` ='" + obj.getName() + "',"
                 + "`USER_LAST_NAME` = '" + obj.getLastName() + "',"
                 + "`USER_LOGIN` = '" + obj.getLogin() + "',"
+                + "`USER_PASSWORD` = '" + Hasher.generatePasswordHash(obj.getPassword()) + "',"
                 + "`USER_BIRTHDATE` = '" + obj.getBirthday().getDate() + "/" + (obj.getBirthday().getMonth() + 1) + "/" + (obj.getBirthday().getYear() - 100) + "',"
                 + "`USER_ADRESS` = '" + obj.getAdress() + "',"
                 + "`USER_ACTIVATED` = " + obj.isIsActivated() +" "
@@ -177,15 +178,6 @@ public class UserService extends ServiceUtils implements IUserService {
             Logger.getLogger(CommentService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return c;
-    }
-
-    @Override
-    public boolean editPassword(User obj) {
-         String req1 = "UPDATE `teck_event`.`user_account`"
-                + "SET"
-                + "`USER_PASSWORD` = '" + Hasher.generatePasswordHash(obj.getPassword()) + "',"
-                 + "WHERE `USER_ID_PK` = " + obj.getId() + ";";
-         return execute(req1);
     }
 
   

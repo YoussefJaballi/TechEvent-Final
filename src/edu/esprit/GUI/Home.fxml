@@ -10,18 +10,17 @@
 <?import javafx.scene.shape.*?>
 
 <AnchorPane id="AnchorPane" fx:id="homeContainer" prefHeight="584.0" prefWidth="831.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.esprit.GUI.HomeController">
-  <children>
-    <TextField layoutX="76.0" layoutY="14.0" prefWidth="200.0" />
-    <AnchorPane fx:id="screen" layoutX="200.0" layoutY="47.0" prefHeight="-1.0" prefWidth="-1.0" />
-    <VBox fx:id="menu" layoutX="0.0" layoutY="48.0" prefHeight="536.5" prefWidth="183.0" />
-    <ImageView fx:id="ProfileImg" fitHeight="47.0" fitWidth="62.666666666666664" layoutX="737.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@../../../../resources/Profile-Default-image.png" />
-      </image>
-    </ImageView>
-    <Hyperlink fx:id="username" layoutX="616.0" layoutY="19.0" onMouseClicked="#onProfilelink" prefWidth="99.0" text="Hyperlink" />
-  </children>
-  <stylesheets>
-    <URL value="@Home.css" />
-  </stylesheets>
+    <children>
+        <TextField layoutX="76.0" layoutY="14.0" prefWidth="200.0" />
+        <AnchorPane fx:id="screen" layoutX="200.0" layoutY="47.0" prefHeight="-1.0" prefWidth="-1.0" />
+        <VBox fx:id="menu" layoutX="0.0" layoutY="48.0" prefHeight="536.5" prefWidth="183.0" />
+        <ImageView fx:id="ProfileImg" fitHeight="47.0" fitWidth="62.666666666666664" layoutX="718.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../../resources/Profile-Default-image.png" />
+            </image>
+        </ImageView>
+    </children>
+    <stylesheets>
+        <URL value="@Home.css" />
+    </stylesheets>
 </AnchorPane>

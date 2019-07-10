@@ -7,6 +7,7 @@ package edu.esprit.GUI;
 
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.GoogleMap;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.javascript.object.MapOptions;
@@ -17,9 +18,12 @@ import edu.esprit.models.Event;
 import edu.esprit.services.exeptions.ComposedIDExeption;
 import edu.esprit.utils.ServiceManager;
 import edu.esprit.utils.UserManager;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
+import java.util.Observable;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -28,12 +32,10 @@ import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -43,20 +45,16 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-import edu.esprit.models.Comment;
-import org.controlsfx.control.Rating;
+import javax.imageio.ImageIO;
+import netscape.javascript.JSObject;
 
 /**
  * FXML Controller class
@@ -81,7 +79,6 @@ public class EventDetailsController implements Initializable, MapComponentInitia
     protected GoogleMap Gmap;
     private MarkerOptions markerOptions2;
     private Marker myMarker2;
-    private Stage popupreport = new Stage();
     @FXML
     private Label titre;
     @FXML
@@ -111,8 +108,6 @@ public class EventDetailsController implements Initializable, MapComponentInitia
     private Button reportButton;
     @FXML
     private HBox buttonContainer;
-    @FXML
-    private VBox CommentPart;
 
     /**
      * Initializes the controller class.
@@ -121,17 +116,13 @@ public class EventDetailsController implements Initializable, MapComponentInitia
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
-           
-            
-
             event = ServiceManager.getInstance().getEventService().find(eventID);
             if (event.getOrganisator().getId() == UserManager.getUser().getId()) {
                 this.buttonContainer.getChildren().remove(this.reportButton);
             } else {
                 this.buttonContainer.getChildren().remove(this.modifier);
-                if (UserManager.getUser().getRole().getId() != 1) {
-                    this.buttonContainer.getChildren().remove(this.supprimer);
-                }
+                if(UserManager.getUser().getRole().getId()!=1)
+                this.buttonContainer.getChildren().remove(this.supprimer);
             }
             Image i = new Image("https://res.cloudinary.com/ddzyat9y5/image/upload/v1561911958/" + event.getPhotoURL());
             this.img.setImage(i);
@@ -143,9 +134,9 @@ public class EventDetailsController implements Initializable, MapComponentInitia
 
             allSessionList.addAll(event.getSessions()
                     .stream().map(e -> new ObservableSession(e.getEventId(),
-                    e.getName(),
-                    e.getStartTime()
-            ))
+                                    e.getName(),
+                                    e.getStartTime()
+                            ))
                     .collect(Collectors.toList())
             );
 
@@ -153,17 +144,11 @@ public class EventDetailsController implements Initializable, MapComponentInitia
             this.tnom.setCellValueFactory(new PropertyValueFactory<ObservableSession, String>("name"));
 
             this.tdate.setCellValueFactory(new PropertyValueFactory<ObservableSession, Date>("Sdate"));
-            
-            this.chargeComment();
 
         } catch (ComposedIDExeption ex) {
             Logger.getLogger(EventDetailsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-        
-        
-        
-  
+
     }
 
     private void initMap() {
@@ -260,83 +245,7 @@ public class EventDetailsController implements Initializable, MapComponentInitia
         } else {
             alert.close();
         }
-
     }
-
-    @FXML
-    private void OnClickReclam(MouseEvent event) {
-
-        try {
-            popupreport.initModality(Modality.APPLICATION_MODAL);
-        popupreport.setTitle("Ce que contient la réclamation");
-
-        TextField body=new TextField() ;
-        body.setDisable(false);
-                 
-        Button valider = new Button("Valider");
-       // Button annuler = new Button("Annuler");
-        Button fermer = new Button("Fermer");
-        fermer.setOnAction(e -> popupreport.close());
-        valider.setOnAction(p -> this.addReport());
-        VBox containerlayout = new VBox();
-        containerlayout.setSpacing(20);
-        containerlayout.setPadding(new Insets(50, 50, 50, 50));
-
-        HBox bodylayout = new HBox();
-        bodylayout.setSpacing(10);
-        bodylayout.setPadding(new Insets(10, 5, 3, 3));
-        bodylayout.getChildren().addAll(body);
-        bodylayout.setAlignment(Pos.BASELINE_LEFT);
-        containerlayout.getChildren().add(bodylayout);
-
-        HBox buttonlayout = new HBox();
-        buttonlayout.setSpacing(5);
-        buttonlayout.setPadding(new Insets(0, 0, 0, 0));
-        buttonlayout.setAlignment(Pos.BASELINE_LEFT);
-        buttonlayout.getChildren().addAll(valider,fermer);
-
-        containerlayout.getChildren().add(buttonlayout);
-
-        Scene scene1 = new Scene(containerlayout, 300, 200);
-
-        popupreport.setScene(scene1);
-
-        popupreport.showAndWait();
-            
-        } catch (Exception exx) {
-            System.out.println("I don't know what fuck is happen");
-        }
-    }
-
-    private void addReport() {
-       
-        
-     
-    }
-    
-    public void chargeComment()
-    {
-        System.out.println(event.getComments());
-        for (Comment c :event.getComments())
-        {
-        try{
-             final Rating rating = new Rating();
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("Display_comment.fxml"));
-            AnchorPane root=loader.load();
-            Display_commentController controllerComment= loader.<Display_commentController>getController();
-            controllerComment.displayComment(c);
-            CommentPart.getChildren().addAll(root);
-            System.out.println("Merde de merde" +c.getBody());
-        }
-        catch(Exception x)
-        {
-            System.out.println("Fuck off");
-        }
-        }
-        
-    }
-    
-    
 
     public class ObservableSession {
 

@@ -7,7 +7,6 @@ package edu.esprit.GUI;
 
 import static edu.esprit.GUI.ForgotPasswordConfirmationController.userToConfirm;
 import edu.esprit.models.User;
-import edu.esprit.utils.Hasher;
 import edu.esprit.utils.ServiceManager;
 import java.io.IOException;
 import java.net.URL;
@@ -49,10 +48,9 @@ public class ForgotPasswordController implements Initializable {
 
     @FXML
     private void onValidNewPassword(MouseEvent event) throws IOException {
-       if(!Hasher.generatePasswordHash(passTxt.getText()).equals(user.getPassword())){
         if(passTxt.getText().equals(passTxtConf.getText())){
             user.setPassword(passTxt.getText());
-            ServiceManager.getInstance().getUserService().editPassword(user);
+            ServiceManager.getInstance().getUserService().edit(user);
             ForgotPasswordController.user=userToConfirm;
             Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
             Stage s = new Stage();
@@ -68,13 +66,7 @@ public class ForgotPasswordController implements Initializable {
             alert.showAndWait();
             passTxt.requestFocus();
         }
-       }else{
-           Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Veuillez utiliser un nouveau mot de passe !");
-            alert.showAndWait();
-            passTxt.requestFocus();
-           
-       }
+        
     }
     
 }

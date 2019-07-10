@@ -16,10 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -29,9 +26,9 @@ import javafx.scene.layout.VBox;
  * @author yjaballi
  */
 public class HomeController implements Initializable {
-    
+
     public static HomeController instance;
-    
+
     @FXML
     private AnchorPane homeContainer;
     @FXML
@@ -40,31 +37,28 @@ public class HomeController implements Initializable {
     private AnchorPane screen;
     @FXML
     private ImageView ProfileImg;
-    @FXML
-    private Hyperlink username;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        username.setText(UserManager.getUser().getName() + " " + UserManager.getUser().getLastName());
+
         instance = this;
         menu.getStyleClass().add("menu");
-        
-//        menu.getChildren().add(createMenuButton("Profile", "UserDetails"));
+
+        menu.getChildren().add(createMenuButton("Profile", "UserDetails"));
         menu.getChildren().add(createMenuButton("event", "EventDetails"));
-        
+
         menu.getChildren().add(createMenuButton("Liste des evennements", "EventList"));
         menu.getChildren().add(createMenuButton("Ma calendrier", "/academiccalendar/ui/main/FXMLDocument"));
-        
+
         if (UserManager.getUser().getRole().getId() == 1) {
             menu.getChildren().add(createMenuButton("Reclamations", "Reports"));
         } else if (UserManager.getUser().getRole().getId() == 3) {
             menu.getChildren().add(createMenuButton("Creer evennement", "AddEvent"));
         }
-        
+
         AnchorPane content = null;
         try {
             /*
@@ -83,7 +77,7 @@ public class HomeController implements Initializable {
 
         // TODO
     }
-    
+
     private Button createMenuButton(String label, String pageName) {
         Button button = new Button(label);
         button.getStyleClass().add("menu-button");
@@ -101,23 +95,9 @@ public class HomeController implements Initializable {
         });
         return button;
     }
-
-    public void setContent(AnchorPane content) {
+    public void setContent(AnchorPane content){
         screen.getChildren().clear();
         screen.getChildren().add(content);
     }
 
-    @FXML
-    private void onProfilelink(MouseEvent event) {
-         try {
-                
-                AnchorPane root = FXMLLoader.load(getClass().getResource("UserDetails.fxml"));
-                setContent(root);
-                //this.personTable.getSelectionModel().clearSelection();
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-    }
-    
 }

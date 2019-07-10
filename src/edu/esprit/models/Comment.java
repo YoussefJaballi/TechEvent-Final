@@ -17,15 +17,6 @@ public class Comment extends Reportable {
     private int eventId;
     private User User;
     private String body;
-    private List<Comment> Childcomments ;
-
-    public List<Comment> getChildcomments() {
-        return Childcomments;
-    }
-
-    public void setChildcomments(List<Comment> Childcomments) {
-        this.Childcomments = Childcomments;
-    }
 
     public Comment(int id, int eventId, User User, String body) {
         this.id = id;

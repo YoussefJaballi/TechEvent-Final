@@ -13,6 +13,4 @@ import java.util.List;
  * @author azer
  */
 public interface ICommentService extends IEventRelatedService<Comment> {
-          boolean create(Comment obj,int parentId) ;
-
 }

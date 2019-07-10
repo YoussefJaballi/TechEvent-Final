@@ -83,6 +83,7 @@ public class RegistrationForm4Controller implements Initializable {
             {
                 ServiceManager.getInstance().getUserService().create(UserManager.getRegisterUser());
                 
+                Popup popup = new Popup(); 
                 alert.setContentText("creer avec succes");
                 alert.showAndWait();
                 
@@ -90,7 +91,7 @@ public class RegistrationForm4Controller implements Initializable {
             catch(Exception e)
             {
                 
-                alert.setContentText("echec de validation a cause de "+e.getMessage());
+                alert.setContentText("echec");
                 alert.showAndWait();
                 e.printStackTrace();
             }
